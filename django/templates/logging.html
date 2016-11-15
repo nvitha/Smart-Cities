@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+
+
+{% block header_nav %}
+  <a class="mdl-navigation__link" href="{% url 'riva_logging' %}">Riva Logs</a> |
+  <a class="mdl-navigation__link" href="{% url 'bac_logging' %}">BAC Logs</a> |
+  <a class="mdl-navigation__link" href="{% url 'volttron_logging' %}">Volttron Logs</a>
+{% endblock %}
+
+{% block nav_title %}
+Logging
+{% endblock %}
+
+
+{% block content %}
+<div class="smartcontent mdl-grid">
+  <div class="mdl-color--white mdl-shadow--2dp mdl-cell max-cell mdl-grid">
+    {% render_table table "mytable.html" %}
+  </div>
+</div>
+{% endblock %}

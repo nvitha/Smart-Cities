@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8f82a7c9-d53d-4a90-916e-88cddfcbce63" name="django squanch" url="http://squanch.us">
+        <fileTransfer host="squanch.us" port="22" rootFolder="/var/www/html/volttron" accessType="SFTP" password="dfe1dfc3dfdedfc1df98dfcbdfdadfe3dfc6dfdedfccdfc7df98dfce" username="mchaney">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

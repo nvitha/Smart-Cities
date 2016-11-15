@@ -1,0 +1,62 @@
+{% load static %}
+
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+    <head>
+        <title>Smart Grid</title>
+        <!-- Material design stylesheets -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css">
+        <link rel="stylesheet" href="{% static "css/material.css"%}">
+        <link rel="stylesheet" href="{% static "css/edits.css"%}">
+  </head>
+  <body>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-color--blue-grey-800 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+          {% block header_nav %}
+          {% endblock %}
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer mdl-color--blue-grey-800">
+        <span class="mdl-layout-title mdl-color--blue-grey-100">{% block nav_title %}{% endblock %}</span>
+        <nav class="mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href="{% url 'index' %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" href="{% url 'metrics' %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assessment</i>Metrics</a>
+          <a class="mdl-navigation__link" href="{% url 'logging' %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Logging</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="page-content">
+                {% block content %}
+                {% endblock %}
+        </div>
+      </main>
+    </div>
+      <!-- Static Javascript References -->
+      {% block extrajs %}{% endblock %}
+      <script type="text/javascript" src="{% static "/javascript/material.js" %}"/>
+
+  </body>
+</html>
