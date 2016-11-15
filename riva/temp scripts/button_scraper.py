@@ -41,7 +41,7 @@ def commit_to_table():
     # MY SQL DATETIME FORMAT: YYYY-MM-DD HH:MM:SS
 
     # Open database connection
-    db = MySQLdb.connect("squanch.us", "volttron_user", "Volttron1!", "volttron_guide")
+    db = MySQLdb.connect("hostname", "username", "password", "db_name")
 
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
