@@ -1,0 +1,421 @@
+[2016-11-22 06:55:59] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 17, in index
+    publish_test()
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 46, in publish_test
+    hook.publish_test()
+  File "/var/www/html/smartcity/smartcity/vagent/hook.py", line 9, in publish_test
+    os.system("/var/www/html/smartcity/smartcity/vagent/tester_vagent.py")
+NameError: global name 'os' is not defined
+[2016-11-22 06:56:33] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 17, in index
+    publish_test()
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 46, in publish_test
+    hook.publish_test()
+  File "/var/www/html/smartcity/smartcity/vagent/hook.py", line 10, in publish_test
+    os.system("/var/www/html/smartcity/smartcity/vagent/tester_vagent.py")
+NameError: global name 'os' is not defined
+[2016-11-22 06:56:40] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 17, in index
+    publish_test()
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 46, in publish_test
+    hook.publish_test()
+  File "/var/www/html/smartcity/smartcity/vagent/hook.py", line 10, in publish_test
+    os.system("/var/www/html/smartcity/smartcity/vagent/tester_vagent.py")
+NameError: global name 'os' is not defined
+[2016-11-22 06:57:22] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 172, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 270, in resolve
+    for pattern in self.url_patterns:
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/utils/functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 313, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/utils/functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 306, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/var/www/html/smartcity/smartcity/urls.py", line 20, in <module>
+    from smartcity.views import index_view
+  File "/var/www/html/smartcity/smartcity/views/__init__.py", line 1, in <module>
+    from .index_view import *
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 8, in <module>
+    from smartcity.vagent import hook
+  File "/var/www/html/smartcity/smartcity/vagent/__init__.py", line 3, in <module>
+    from .hook import *
+  File "/var/www/html/smartcity/smartcity/vagent/hook.py", line 9
+    def publish_test():
+      ^
+IndentationError: expected an indented block
+[2016-11-22 07:29:21] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 17, in index
+    hook.publish_test()
+  File "/var/www/html/smartcity/smartcity/vagent/hook.py", line 10, in publish_test
+    process = subprocess.Popen(['python', '/var/www/html/smartcity/smartcity/vagent/tester_vagent.py'], env={'PYTHONPATH': os.pathsep.join(sys.path)})
+NameError: global name 'os' is not defined
+[2016-11-22 07:38:44] WARNING [django.request.get_response:152] Not Found: /None
+[2016-11-22 08:18:02] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:18:05] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:18:32] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:20:21] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:20:22] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:20:40] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:20:59] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 08:21:00] ERROR [django.request.handle_uncaught_exception:124] Internal Server Error: /
+Traceback (most recent call last):
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/exception.py", line 39, in inner
+    response = get_response(request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/var/www/html/smartcity/smartcity/views/index_view.py", line 18, in index
+    return HttpResponse(template.render(context, request))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/backends/django.py", line 66, in render
+    return self.template.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 208, in render
+    return self._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 174, in render
+    return compiled_parent._render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/loader_tags.py", line 70, in render
+    result = block.nodelist.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 994, in render
+    bit = node.render_annotated(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/template/defaulttags.py", line 439, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "/var/lib/volttron/env/lib/python2.7/site-packages/django/urls/resolvers.py", line 392, in _reverse_with_prefix
+    (lookup_view_s, args, kwargs, len(patterns), patterns)
+NoReverseMatch: Reverse for 'volttron_publish' with arguments '()' and keyword arguments '{}' not found. 1 pattern(s) tried: ['%message=([a-zA-Z]+)$']
+[2016-11-22 10:10:43] WARNING [django.request.get_response:152] Not Found: /wp-login.php
+[2016-11-22 10:10:43] WARNING [django.request.get_response:152] Not Found: /administrator/
+[2016-11-22 11:07:59] ERROR [django.security.DisallowedHost.response_for_exception:73] Invalid HTTP_HOST header: '147.222.165.15'. You may need to add u'147.222.165.15' to ALLOWED_HOSTS.
+[2016-11-22 12:22:28] ERROR [django.security.DisallowedHost.response_for_exception:73] Invalid HTTP_HOST header: 'www.sciencedirect.com'. You may need to add u'www.sciencedirect.com' to ALLOWED_HOSTS.

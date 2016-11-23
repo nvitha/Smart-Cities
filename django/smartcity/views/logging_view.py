@@ -1,19 +1,13 @@
-import logging
-
+#import logging
 from django.http import HttpResponse
 from django.template import loader
-from volttron.models import ButtonPresses
-from volttron.tables import RivaTable
+from smartcity.models import ButtonPresses
+from smartcity.tables import RivaTable
 from django_tables2 import RequestConfig
-from volttron.vagent.django_agent import agent
-
-# python debug logger
-logger = logging.getLogger(__name__)
 
 
 def logging(request):
 
-    agent.publish_message()
     # define variable dict to pass into the template
 
     table = RivaTable(ButtonPresses.objects.all(), order_by='-pressed_datetime')

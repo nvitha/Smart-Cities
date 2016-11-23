@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4c1bd193-29ed-4c68-b10d-ff69dc1450c5" name="squanch.us" url="http://squanch.us">
+        <fileTransfer host="squanch.us" port="22" rootFolder="/var/www/html/smartcity" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

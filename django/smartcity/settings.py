@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import sys
-sys.path.append('/var/lib/volttron')
+#import sys
+#sys.path.append('/var/lib/smartcity')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_tables2',
     'chartit',
-    'volttron',
+    'smartcity',
 ]
 
 MIDDLEWARE = [
@@ -54,12 +54,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'volttron.urls'
+ROOT_URLCONF = 'smartcity.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['html/volttron/templates/'],
+        'DIRS': ['html/smartcity/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'volttron.wsgi.application'
+WSGI_APPLICATION = 'smartcity.wsgi.application'
 
 
 # Database
@@ -92,23 +92,89 @@ DATABASES = {
 
 # Logging
 # https://docs.djangoproject.com/en/1.10/topics/logging/
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/var/www/html/smartcity/logs/error.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s',
+	    'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+	    'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+    },
     'handlers': {
-        'file': {
+        'console': {
             'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'development_logfile': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
             'class': 'logging.FileHandler',
-            'filename': '/var/www/html/volttron/logs/error.log',
+            'filename': '/var/www/html/smartcity/logs/django_dev.log',
+            'formatter': 'verbose'
+        },
+        'production_logfile': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': '/var/www/html/smartcity/logs/django_production.log',
+            'formatter': 'simple'
+        },
+        'dba_logfile': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_false','require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': '/var/www/html/smartcity/logs/django_dba.log',
+            'formatter': 'simple'
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+        'coffeehouse': {
+            'handlers': ['console','development_logfile','production_logfile'],
+         },
+        'dba': {
+            'handlers': ['console','dba_logfile'],
         },
-    },
+        'django': {
+            'handlers': ['console','development_logfile','production_logfile'],
+        },
+        'py.warnings': {
+            'handlers': ['console','development_logfile'],
+        },
+    }
 }
 
 

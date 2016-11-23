@@ -1,4 +1,4 @@
-"""volttron URL Configuration
+"""SmartCity URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -17,15 +17,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from volttron.views import index_view
-from volttron.views import metrics_view
-from volttron.views import logging_view
+from smartcity.views import index_view
+from smartcity.views import metrics_view
+from smartcity.views import logging_view
 
 urlpatterns = [
     # Admin UI
     url(r'^admin/', admin.site.urls),
     # Home Page
     url(r'^$', index_view.index, name='index'),
+    url(r'^starttest/$', index_view.publish, name='volttron_publish'),
     # Metrics View
     url(r'^metrics/', metrics_view.metrics, name='metrics'),
     # Logging View
@@ -33,5 +34,6 @@ urlpatterns = [
     url(r'^logging/riva/$', logging_view.riva_logging, name='riva_logging'),
     url(r'^logging/bac/$', logging_view.riva_logging, name='bac_logging'),
     url(r'^logging/volttron/$', logging_view.riva_logging, name='volttron_logging'),
+
 
 ]

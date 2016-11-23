@@ -45,32 +45,13 @@ from volttron.platform.agent import utils
 # These are the options that can be set from the settings module.
 from settings import remote_url, topics_prefixes_to_watch, heartbeat_period
 
-# Setup logging so that we could use it if we needed to.
 utils.setup_logging()
 _log = logging.getLogger(__name__)
 
-# Agents need access to VOLTTRON_HOME even if running in standalone mode
-# to keep track of keys. This sets a default home.
 set_home()
-
-logging.basicConfig(
-                level=logging.debug,
-                format='%(asctime)s   %(levelname)-8s %(message)s',
-                datefmt='%m-%d-%y %H:%M:%S')
 
 class StandAloneListener(Agent):
     ''' A standalone version of the ListenerAgent'''
-    
-    def onmessage(self, peer, sender, bus, topic, headers, message):
-        '''Handle incoming messages on the bus.'''
-        d = {'SA_topic': topic, 'SA_headers': headers, 'SA_message': message}
-        writer = json.dumps(d)+'\n'
-
-        sys.stdout.write(writer)
-
-        outfile = open('django_listen.log', 'w')
-        outfile.write(writer)
-        outfile.close()
 
     @Core.receiver('onstart')
     def start(self, sender, **kwargs):
@@ -79,50 +60,25 @@ class StandAloneListener(Agent):
         Subscribe to all points in the topics_prefix_to_watch tuple
         defined in settings.py.
         '''
+        writer = '~~~~~~~~~~THIS IS SOME TEXT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
-        for prefix in topics_prefixes_to_watch:
-            sys.stdout.write('connecting to prefix: {}\n'.format(prefix))
-            self.vip.pubsub.subscribe(peer='pubsub', 
-                       prefix=prefix,
-                       callback=self.onmessage).get(timeout=5)
+        sys.stdout.write(writer)
 
-    # Demonstrate periodic decorator and settings access
-    @Core.periodic(heartbeat_period)
-    def publish_heartbeat(self):
-        '''Send heartbeat message every heartbeat_period seconds.
-
-        heartbeat_period is set and can be adjusted in the settings module.
-        '''
-        sys.stdout.write('publishing heartbeat.\n')
-        now = datetime.utcnow().isoformat(' ') + 'Z'
-        headers = {
-            #'AgentID': self._agent_id,
-            headers_mod.CONTENT_TYPE: headers_mod.CONTENT_TYPE.PLAIN_TEXT,
-            headers_mod.DATE: now,
-        }
-        self.vip.pubsub.publish(
-            'pubsub', 'heartbeat/standalonelistener', headers, 
-            now).get(timeout=5)
-
-    @PubSub.subcribe('pubsub', '/django/service')
-    def publish_message(self):
-        '''Send heartbeat message every heartbeat_period seconds.
-
-        heartbeat_period is set and can be adjusted in the settings module.
-        '''
-        sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CALLED FROM THE DJANGO SERVER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.\n')
-        sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CALLED FROM THE DJANGO SERVER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.\n')
         now = datetime.utcnow().isoformat(' ') + 'Z'
         headers = {
             # 'AgentID': self._agent_id,
             headers_mod.CONTENT_TYPE: headers_mod.CONTENT_TYPE.PLAIN_TEXT,
             headers_mod.DATE: now,
         }
-        self.vip.pubsub.publish(
-            'pubsub', 'heartbeat/standalonelistener', headers,
-            now).get(timeout=5)
 
-    
+        self.vip.pubsub.publish(
+            peer='pubsub',
+            topic='/django/test',
+            headers=headers,
+            message=writer)
+
+        exit(0)
+
 if  __name__ == '__main__':
     try:
         # If stdout is a pipe, re-open it line buffered
@@ -135,6 +91,7 @@ if  __name__ == '__main__':
         print(remote_url())
         agent = StandAloneListener(address=remote_url(),
                                    identity='django')
+
         task = gevent.spawn(agent.core.run)
         try:
             task.join()
