@@ -37,13 +37,13 @@ import gevent
 import logging
 from gevent.core import callback
 
-from smartcity.platform import get_home, set_home
-from smartcity.platform.messaging import headers as headers_mod
-from smartcity.platform.vip.agent import Agent, PubSub, Core
-from smartcity.platform.agent import utils
+from volttron.platform import get_home, set_home
+from volttron.platform.messaging import headers as headers_mod
+from volttron.platform.vip.agent import Agent, PubSub, Core
+from volttron.platform.agent import utils
 
 # These are the options that can be set from the settings module.
-from settings import remote_url, topics_prefixes_to_watch, heartbeat_period
+from django.smartcity.vagent.settings import remote_url, topics_prefixes_to_watch, heartbeat_period
 
 # Setup logging so that we could use it if we needed to.
 utils.setup_logging()
@@ -102,24 +102,6 @@ class StandAloneListener(Agent):
         }
         self.vip.pubsub.publish(
             'pubsub', 'heartbeat/standalonelistener', headers, 
-            now).get(timeout=5)
-
-    @PubSub.subcribe('pubsub', '/django/service')
-    def publish_message(self):
-        '''Send heartbeat message every heartbeat_period seconds.
-
-        heartbeat_period is set and can be adjusted in the settings module.
-        '''
-        sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CALLED FROM THE DJANGO SERVER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.\n')
-        sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CALLED FROM THE DJANGO SERVER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.\n')
-        now = datetime.utcnow().isoformat(' ') + 'Z'
-        headers = {
-            # 'AgentID': self._agent_id,
-            headers_mod.CONTENT_TYPE: headers_mod.CONTENT_TYPE.PLAIN_TEXT,
-            headers_mod.DATE: now,
-        }
-        self.vip.pubsub.publish(
-            'pubsub', 'heartbeat/standalonelistener', headers,
             now).get(timeout=5)
 
     
