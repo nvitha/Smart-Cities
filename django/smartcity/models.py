@@ -2,9 +2,11 @@
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+#
+# Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
+# into your database.
 from __future__ import unicode_literals
 
 from django.db import models
@@ -19,24 +21,24 @@ class AuthGroup(models.Model):
 
 
 class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup)
+    permission = models.ForeignKey('AuthPermission')
 
     class Meta:
         managed = False
         db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
+        unique_together = (('group_id', 'permission_id'),)
 
 
 class AuthPermission(models.Model):
     name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType')
     codename = models.CharField(max_length=100)
 
     class Meta:
         managed = False
         db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
+        unique_together = (('content_type_id', 'codename'),)
 
 
 class AuthUser(models.Model):
@@ -57,26 +59,36 @@ class AuthUser(models.Model):
 
 
 class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser)
+    group = models.ForeignKey(AuthGroup)
 
     class Meta:
         managed = False
         db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
+        unique_together = (('user_id', 'group_id'),)
 
 
 class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser)
+    permission = models.ForeignKey(AuthPermission)
 
     class Meta:
         managed = False
         db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
+        unique_together = (('user_id', 'permission_id'),)
 
 
 class ButtonPresses(models.Model):
+    button_presses_id = models.AutoField(primary_key=True)
+    button_pressed = models.CharField(max_length=45)
+    pressed_datetime = models.DateTimeField()
+    db_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'button_presses'
+
+class BAC_(models.Model):
     button_presses_id = models.AutoField(primary_key=True)
     button_pressed = models.CharField(max_length=45)
     pressed_datetime = models.DateTimeField()
@@ -104,8 +116,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.SmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', blank=True, null=True)
+    user = models.ForeignKey(AuthUser)
 
     class Meta:
         managed = False
@@ -153,7 +165,7 @@ class Meta(models.Model):
 
 class Topics(models.Model):
     topic_id = models.AutoField(primary_key=True)
-    topic_name = models.CharField(unique=True, max_length=255)
+    topic_name = models.CharField(unique=True, max_length=512)
 
     class Meta:
         managed = False
@@ -161,9 +173,9 @@ class Topics(models.Model):
 
 
 class VolttronTableDefinitions(models.Model):
-    table_id = models.CharField(primary_key=True, max_length=255)
-    table_name = models.CharField(max_length=255)
-    table_prefix = models.CharField(max_length=255, blank=True, null=True)
+    table_id = models.CharField(primary_key=True, max_length=512)
+    table_name = models.CharField(max_length=512)
+    table_prefix = models.CharField(max_length=512, blank=True, null=True)
 
     class Meta:
         managed = False
