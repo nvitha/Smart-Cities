@@ -1,0 +1,7 @@
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.007) SELECT `button_presses`.`button_pressed`, COUNT(`button_presses`.`button_pressed`) AS `the_count` FROM `button_presses` GROUP BY `button_presses`.`button_pressed` ORDER BY NULL; args=()
+(0.007) SELECT `button_presses`.`button_pressed`, COUNT(`button_presses`.`button_pressed`) AS `the_count` FROM `button_presses` GROUP BY `button_presses`.`button_pressed` ORDER BY NULL; args=()
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.007) SELECT `button_presses`.`button_pressed`, COUNT(`button_presses`.`button_pressed`) AS `the_count` FROM `button_presses` GROUP BY `button_presses`.`button_pressed` ORDER BY NULL; args=()
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.007) SELECT `button_presses`.`button_pressed`, COUNT(`button_presses`.`button_pressed`) AS `the_count` FROM `button_presses` GROUP BY `button_presses`.`button_pressed` ORDER BY NULL; args=()
