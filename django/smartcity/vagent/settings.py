@@ -1,7 +1,7 @@
 # These topic will be watched.  The messages will be written to
 # standard out.
 topics_prefixes_to_watch = (
-	'',
+	'heartbeat',
 	'heartbeat/ListenerAgent/'
 	#'datalogger'
 )
@@ -14,7 +14,7 @@ _params = {
 	# The root of the address.
 	'vip_address': 'tcp://127.0.0.1',
 	'port': 22916,
-
+	
 	# public and secret key for the standalonelistener agent.
 	# These can be created from the volttron-ctl keypair command.
 	'agent_public': 'XAa3R9hrbNVFLiOCtlKP9KuH8BZblRRYMj8jETWlaW8',
