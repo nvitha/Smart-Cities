@@ -32,6 +32,7 @@ def stop_random_test():
 
 
 
+
 #
 # def main():
 #     process = subprocess.Popen(['python', '/var/www/html/smartcity/smartcity/vagent/tester_vagent.py'], env={'PYTHONPATH': os.pathsep.join(sys.path)})
