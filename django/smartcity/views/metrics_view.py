@@ -40,6 +40,7 @@ def parse_summed_data(summed_data):
 
     return ordered_data
 
+
 def get_value_counts():
     data = ButtonPresses.objects.values('button_pressed').annotate(the_count=Count('button_pressed'))
     values = []

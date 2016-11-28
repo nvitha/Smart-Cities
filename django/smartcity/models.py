@@ -78,17 +78,17 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user_id', 'permission_id'),)
 
 
-class ButtonPresses(models.Model):
-    button_presses_id = models.AutoField(primary_key=True)
-    button_pressed = models.CharField(max_length=45)
-    pressed_datetime = models.DateTimeField()
-    db_datetime = models.DateTimeField(blank=True, null=True)
+class BacMode(models.Model):
+    mode_id = models.AutoField(primary_key=True)
+    datetime = models.DateTimeField(blank=True, null=True)
+    current_mode = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'button_presses'
+        db_table = 'bac_mode'
 
-class BAC_(models.Model):
+
+class ButtonPresses(models.Model):
     button_presses_id = models.AutoField(primary_key=True)
     button_pressed = models.CharField(max_length=45)
     pressed_datetime = models.DateTimeField()

@@ -37,11 +37,8 @@ urlpatterns = [
     url(r'^stop_uniform/$', index_view.stop_uniform_test, name='stop_uniform'),
 
     # Index BAC
-    url(r'^mode_one/$', index_view.mode_one, name='mode_one'),
-    url(r'^mode_two/$', index_view.mode_one, name='mode_two'),
-    url(r'^mode_three/$', index_view.mode_one, name='mode_three'),
-    url(r'^mode_four/$', index_view.mode_one, name='mode_four'),
-    
+    url(r'^(?P<bac_mode>[1-4]+)/$', index_view.index, name='select_mode'),
+
     # Metrics View
     url(r'^metrics/', metrics_view.metrics, name='metrics'),
     # Logging View
