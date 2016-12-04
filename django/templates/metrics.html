@@ -11,7 +11,9 @@ Metrics
 
 <div class="smartcontent mdl-grid">
     <div class="mdl-cell mdl-cell--6-col">Total Button Presses</div>
-    <div class="mdl-cell mdl-cell--6-col">Button 0 Presses / Month</div>
+    <div class="mdl-cell mdl-cell--6-col">Total Tests</div>
+    <div class="mdl-cell mdl-cell--6-col">Button 0 Presses / Day</div>
+
 </div>
     <div class="smartcontent mdl-grid">
         <div class="mdl-cell mdl-cell--6-col">
@@ -38,6 +40,35 @@ Metrics
               </script>
               <canvas id="chart_container" width="400" height="400"></canvas>
             </div>
+
+         <div class="mdl-cell mdl-cell--6-col">
+              <script type="text/javascript">
+                $( document ).ready(function() {
+                    var data = {
+                        labels: ['1', '2', '3', '4'],
+                        datasets: [
+                            {
+                                label: "Count per test.",
+                                fillColor: "rgba(255,109,0,0.8)",
+                                strokeColor: "rgba(220,220,220,1)",
+                                pointColor: "rgba(220,220,220,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(220,220,220,1)",
+                                data: {{ test_counts }}
+                            }
+                        ]
+                    };
+                    var ctx = document.getElementById("chart_container").getContext("2d");
+                    var myBarChart = new Chart(ctx).Bar(data);
+                });
+              </script>
+              <canvas id="chart_container" width="400" height="400"></canvas>
+            </div>
+
+
+
+
             <div class="mdl-cell mdl-cell--6-col">
                     <script type="text/javascript">
                 $( document ).ready(function() {

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Count
 from smartcity.models import ButtonPresses
+from smartcity.models import BAC_
 
 # python debug logger
 #logger = logging.getLogger(__name__)
@@ -15,8 +16,10 @@ def metrics(request):
     summed_data = get_button_over_time()
     parsed_data = parse_summed_data(summed_data)
     button_counts = get_value_counts()
+    testing_counts = get_value_tests()
     date_data = [i for i in xrange(1,31)]
-    context = {'button_counts': button_counts, 'summed_data': parsed_data, 'date_data': date_data}
+    context = {'button_counts': button_counts, 'summed_data': parsed_data, 'date_data': date_data,
+               'testing_counts': testing_counts}
 
     # getting our template
     template = loader.get_template('metrics.html')
@@ -48,6 +51,13 @@ def get_value_counts():
             values.append(item['the_count'])
     return values
 
+def get_value_tests():
+    data = BAC_.objects.values('button_pressed').annotate(the_count=Count('button_pressed'))
+    values = []
+    for item in data:
+        if item['the_count'] > 10:
+            values.append(item['the_count'])
+    return values
 
 def get_button_over_time():
 
