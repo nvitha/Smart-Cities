@@ -28,24 +28,20 @@ urlpatterns = [
     url(r'^$', index_view.index, name='index'),
 
     # Index Smart Meter
-    url(r'^refresh_status$', index_view.index, name='refresh_status'),
-    url(r'^start_thrash/$', index_view.start_thrash_test, name='start_thrash'),
-    url(r'^stop_thrash/$', index_view.stop_thrash_test, name='stop_thrash'),
-    url(r'^start_random/$', index_view.start_random_test, name='start_random'),
-    url(r'^stop_random/$', index_view.stop_random_test, name='stop_random'),
-    url(r'^start_uniform/$', index_view.start_uniform_test, name='start_uniform'),
-    url(r'^stop_uniform/$', index_view.stop_uniform_test, name='stop_uniform'),
+    url(r'^test=(?P<test_mode>[A-Za-z]+_[A-Za-z]+)/$', index_view.index, name='test'),
+
+    # Manually Refresh Status
+    url(r'^refresh=(?P<refresh_flag>[A-Za-z]+)$', index_view.index, name='refresh_status'),
 
     # Index BAC
-    url(r'^(?P<bac_mode>[1-4]+)/$', index_view.index, name='select_mode'),
+    url(r'^mode_(?P<bac_mode>[1-4]+)/$', index_view.index, name='select_mode'),
 
     # Metrics View
     url(r'^metrics/', metrics_view.metrics, name='metrics'),
     # Logging View
     url(r'^logging/$', logging_view.logging, name='logging'),
-    url(r'^logging/riva/$', logging_view.riva_logging, name='riva_logging'),
-    url(r'^logging/bac/$', logging_view.riva_logging, name='bac_logging'),
-    url(r'^logging/volttron/$', logging_view.riva_logging, name='volttron_logging'),
+    url(r'^logging/bac/$', logging_view.bac_logging, name='bac_logging'),
+    url(r'^logging/volttron/$', logging_view.logging, name='volttron_logging'),
 
 
 ]

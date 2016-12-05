@@ -1,19 +1,29 @@
 #import logging
 from django.http import HttpResponse
 from django.template import loader
-from smartcity.models import ButtonPresses
-from smartcity.tables import RivaTable
+from django.db.models import Q
+from smartcity.models import Data
+from smartcity.tables import DjangoRivaTable, BacTable, RivaCommandsTable
 from django_tables2 import RequestConfig
 
 
 def logging(request):
 
     # define variable dict to pass into the template
+    table_type = 'riva'
 
-    table = RivaTable(ButtonPresses.objects.all(), order_by='-pressed_datetime')
-    RequestConfig(request).configure(table)
+    sim_table = DjangoRivaTable(Data.objects.filter(topic_id=4), order_by='-ts')
+    RequestConfig(request).configure(sim_table)
 
-    context = {'table': table}
+    command_table = RivaCommandsTable(Data.objects.filter(Q(topic_id=5) |
+                                                          Q(topic_id=6) |
+                                                          Q(topic_id=7) |
+                                                          Q(topic_id=8)
+                                                          ), order_by='-ts')
+
+    RequestConfig(request).configure(command_table)
+
+    context = {'sim_table': sim_table, 'command_table': command_table, 'table_type': 'riva'}
     # getting our template
     template = loader.get_template('logging.html')
 
@@ -21,13 +31,13 @@ def logging(request):
     return HttpResponse(template.render(context, request))
 
 
-def riva_logging(request):
-    # define variable dict to pass into the template
+def bac_logging(request):
+    table_type = 'bac'
 
-    table = RivaTable(ButtonPresses.objects.all(), order_by='-pressed_datetime')
+    table = BacTable(Data.objects.filter(topic_id=1), order_by='-ts')
     RequestConfig(request).configure(table)
-
-    context = {'table': table}
+    query = Data.objects.all()
+    context = {'bac_table': table, 'table_type': 'bac'}
     # getting our template
     template = loader.get_template('logging.html')
 

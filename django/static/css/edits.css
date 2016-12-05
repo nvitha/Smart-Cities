@@ -24,3 +24,11 @@ html, body {
 .full-width {
     width: 100%;
 }
+
+.center-items {
+  justify-content: center;
+}
+
+.center-text{
+  text-align:center
+}

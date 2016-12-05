@@ -1,27 +1,33 @@
 #import logging
 from itertools import groupby
 from datetime import datetime
+from dateutil import tz
 from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Count
 from smartcity.models import ButtonPresses
+from smartcity.models import Data
+from django.db.models import Q
 
 # python debug logger
 #logger = logging.getLogger(__name__)
-
+from_zone = tz.tzutc()
+to_zone = tz.tzlocal()
 
 def metrics(request):
 
-    summed_data = get_button_over_time()
-    parsed_data = parse_summed_data(summed_data)
+    # summed_data = get_button_over_time()
+    # parsed_data = parse_summed_data(summed_data)
     button_counts = get_value_counts()
-    date_data = [i for i in xrange(1,31)]
-    context = {'button_counts': button_counts, 'summed_data': parsed_data, 'date_data': date_data}
 
+    #date_data = [i for i in xrange(1,31)]
+
+    context = {'button_counts': button_counts}
     # getting our template
     template = loader.get_template('metrics.html')
     # rendering the template in HttpResponse
     return HttpResponse(template.render(context, request))
+
 
 def parse_summed_data(summed_data):
 
@@ -30,7 +36,7 @@ def parse_summed_data(summed_data):
 
     lookup = {}
     for item in summed_data:
-        lookup[int(item[0])] = item[1]
+        lookup[int(item[0][-2])] = item[1]
 
     for i in xrange(1, 31):
         if i in lookup:
@@ -42,21 +48,28 @@ def parse_summed_data(summed_data):
 
 
 def get_value_counts():
-    data = ButtonPresses.objects.values('button_pressed').annotate(the_count=Count('button_pressed'))
+    data = Data.objects.filter(Q(topic_id=5) |
+                               Q(topic_id=6) |
+                               Q(topic_id=7) |
+                               Q(topic_id=8)
+                               ).values('topic_id').annotate(the_count=Count('value_string'))
     values = []
     for item in data:
         if item['the_count'] > 10:
             values.append(item['the_count'])
+
     return values
 
 
 def get_button_over_time():
 
-    data = ButtonPresses.objects.values_list('button_pressed', 'pressed_datetime')
+    data = Data.objects.filter(topic_id=1).values_list('value_string', 'ts')
     binned_data = [[] for _ in range(4)]
     for row in data:
-        if int(row[0]) < 4:
-            binned_data[int(row[0])].append((int(row[0]), int(row[1].strftime("%d"))))
+        if int(row[0][-2]) < 5:
+            value = int(row[0][-2].encode('utf8'))
+            ts = datetime.strftime(row[1], '%Y-%m-%d %H:%M:%S')
+            binned_data[value-1].append((value, ts))
 
     i = 0
     summed_data = [[] for _ in range(4)]
@@ -89,3 +102,12 @@ def get_button_over_time():
 
     return summed_data[0][0]
 
+
+def get_bac_presses():
+
+    data = Data.objects.filter(topic_id=1).values('value_string')
+    presses = []
+    for item in data:
+        presses.append(item['value_string'])
+
+    return presses

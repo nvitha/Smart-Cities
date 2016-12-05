@@ -12,13 +12,12 @@ import gevent
 # utils.setup_logging()
 # _log = logging.getLogger(__name__)
 
-
 class TesterAgent(Agent):
 
     @Core.receiver('onstart')
     def onstart(self, sender, **kwargs):
 
-        writer = 'Stop uniform test.'
+        writer = 'Start thrashing test.'
 
         now = datetime.utcnow().isoformat(' ') + 'Z'
         headers = {
@@ -29,7 +28,7 @@ class TesterAgent(Agent):
 
         self.vip.pubsub.publish(
             peer='pubsub',
-            topic='record/django/riva',
+            topic='/django/test',
             headers=headers,
             message=writer)
 

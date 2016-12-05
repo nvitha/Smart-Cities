@@ -28,7 +28,7 @@ class TesterAgent(Agent):
 
         self.vip.pubsub.publish(
             peer='pubsub',
-            topic='/django/test',
+            topic='record/django/riva',
             headers=headers,
             message=writer)
 

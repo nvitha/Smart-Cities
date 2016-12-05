@@ -1,0 +1,8 @@
+fc buttons_vagent-0.1         buttons_vagent-0.1_1 buttons         running [15360]
+3a listeneragent-3.2          django_listener      django-listener running [17000]
+6d listeneragent-3.2          listeneragent-3.2_1  listener              
+31 listeneragent-3.2          riva_listener        riva-listener   running [11813]
+6c master_driveragent-2.0     platform.driver      fake-driver           
+be sqlhistorianagent-3.6.1    platform.historian   mysql           running [1299]
+58 vcplatformagent-3.5.4      platform.agent       vcp             running [1301]
+6f volttroncentralagent-3.5.5 volttron.central     vc              running [1300]

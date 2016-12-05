@@ -10,11 +10,17 @@ Metrics
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 
 <div class="smartcontent mdl-grid">
-    <div class="mdl-cell mdl-cell--6-col">Total Button Presses</div>
-    <div class="mdl-cell mdl-cell--6-col">Button 0 Presses / Month</div>
+    <div class="mdl-cell--6-col mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+            <div class="mdl-color-text--blue-grey-800 mdl-typography--title">
+                Buttons Pressed
+            </div>
+        <div class="mdl-layout-spacer"></div>
+    </div>
 </div>
-    <div class="smartcontent mdl-grid">
-        <div class="mdl-cell mdl-cell--6-col">
+<div class="smartcontent mdl-grid">
+    <div class="mdl-color--white mdl-shadow--2dp mdl-cell--12-col mdl-grid mdl-color-text--blue-grey-500 mdl-grid">
+
               <script type="text/javascript">
                 $( document ).ready(function() {
                     var data = {
@@ -36,34 +42,11 @@ Metrics
                     var myBarChart = new Chart(ctx).Bar(data);
                 });
               </script>
-              <canvas id="chart_container" width="400" height="400"></canvas>
-            </div>
-            <div class="mdl-cell mdl-cell--6-col">
-                    <script type="text/javascript">
-                $( document ).ready(function() {
-                    var data = {
-                        labels: {{ date_data }},
-                        datasets: [
-                            {
-                                label: "Button presses over time.",
-                                fillColor: "rgba(255,109,0,0.8)",
-                                strokeColor: "rgba(220,220,220,1)",
-                                pointColor: "rgba(220,220,220,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(220,220,220,1)",
-                                data: {{ summed_data }}
-                            }
-                        ]
-                    };
-                    var ctx = document.getElementById("button_over_time").getContext("2d");
-                    var myLineChart = new Chart(ctx).Line(data);
-                });
-              </script>
-              <canvas id="button_over_time" width="600" height="400"></canvas>
+                <div class="mdl-layout-spacer"></div>
+                    <canvas id="chart_container" width="400" height="400"></canvas>
+                <div class="mdl-layout-spacer"></div>
 
-            </div>
-
+    </div>
 </div>
 {% endblock %}
 

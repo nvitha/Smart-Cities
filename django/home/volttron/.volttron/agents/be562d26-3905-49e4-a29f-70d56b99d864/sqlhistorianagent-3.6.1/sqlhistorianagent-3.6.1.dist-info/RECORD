@@ -1,0 +1,11 @@
+sqlhistorian/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+sqlhistorian/historian.py,sha256=IzmPe_BK4aCCtx4LOF_4-bWP6S4aZMlaCzmmispNgiU,15914
+sqlhistorian/settings.py,sha256=J8PRlTmi5_EixEmFe53cyfbLalL-Jat06Es50_OmBlY,21
+sqlhistorianagent-3.6.1.dist-info/DESCRIPTION.rst,sha256=OCTuuN6LcWulhHS3d5rfjdsQtW22n7HENFRh6jC6ego,10
+sqlhistorianagent-3.6.1.dist-info/METADATA,sha256=skfwG26g5kBH1ALUUwtSHI0BMU5PzZIIPEtt9u9UEgM,224
+sqlhistorianagent-3.6.1.dist-info/RECORD,,
+sqlhistorianagent-3.6.1.dist-info/WHEEL,sha256=u6Fy2U76CDFJ6q2P27rqtBo3AN6qpylFiMaYzNr2lJg,95
+sqlhistorianagent-3.6.1.dist-info/entry_points.txt,sha256=gwlazn3uJOfhV2twUOdrpc4ugk6JVr0o9bMNb-8O2VE,70
+sqlhistorianagent-3.6.1.dist-info/metadata.json,sha256=GMmhsZgI1suSnTtjlKTZvoAlopAOoParqBZ6OyxQsUI,391
+sqlhistorianagent-3.6.1.dist-info/top_level.txt,sha256=5fUmlreGB3QEp03tY-YnAKeLM2AJFD7FwJKPRtiWDqo,13
+sqlhistorianagent-3.6.1.dist-info/config,sha256=jjw38nRJLjDfhykaO1vIouehXMawFVlstnbZDilaesM,295

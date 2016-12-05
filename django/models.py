@@ -21,8 +21,8 @@ class AuthGroup(models.Model):
 
 
 class AuthGroupPermissions(models.Model):
-    group_id = models.ForeignKey(AuthGroup)
-    permission_id = models.ForeignKey('AuthPermission')
+    group = models.ForeignKey(AuthGroup)
+    permission = models.ForeignKey('AuthPermission')
 
     class Meta:
         managed = False
@@ -32,7 +32,7 @@ class AuthGroupPermissions(models.Model):
 
 class AuthPermission(models.Model):
     name = models.CharField(max_length=255)
-    content_type_id = models.ForeignKey('DjangoContentType')
+    content_type = models.ForeignKey('DjangoContentType')
     codename = models.CharField(max_length=100)
 
     class Meta:
@@ -59,8 +59,8 @@ class AuthUser(models.Model):
 
 
 class AuthUserGroups(models.Model):
-    user_id = models.ForeignKey(AuthUser)
-    group_id = models.ForeignKey(AuthGroup)
+    user = models.ForeignKey(AuthUser)
+    group = models.ForeignKey(AuthGroup)
 
     class Meta:
         managed = False
@@ -69,8 +69,8 @@ class AuthUserGroups(models.Model):
 
 
 class AuthUserUserPermissions(models.Model):
-    user_id = models.ForeignKey(AuthUser)
-    permission_id = models.ForeignKey(AuthPermission)
+    user = models.ForeignKey(AuthUser)
+    permission = models.ForeignKey(AuthPermission)
 
     class Meta:
         managed = False
@@ -100,7 +100,7 @@ class ButtonPresses(models.Model):
 
 
 class Data(models.Model):
-    ts = models.DateTimeField(primary_key=True)
+    ts = models.DateTimeField()
     topic_id = models.IntegerField()
     value_string = models.TextField()
 
@@ -154,15 +154,6 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class DjangoBacModes(models.Model):
-    ts = models.DateTimeField(primary_key=True)
-    value_string = models.TextField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_bac_modes'
-
-
 class Meta(models.Model):
     topic_id = models.IntegerField(primary_key=True)
     metadata = models.TextField()
@@ -172,19 +163,9 @@ class Meta(models.Model):
         db_table = 'meta'
 
 
-class RivaConnection(models.Model):
-    conn_id = models.AutoField(primary_key=True)
-    conn_status = models.IntegerField(blank=True, null=True)
-    conn_datetime = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'riva_connection'
-
-
 class Topics(models.Model):
     topic_id = models.AutoField(primary_key=True)
-    topic_name = models.CharField(unique=True, max_length=255)
+    topic_name = models.CharField(unique=True, max_length=512)
 
     class Meta:
         managed = False
@@ -192,7 +173,7 @@ class Topics(models.Model):
 
 
 class VolttronTableDefinitions(models.Model):
-    table_id = models.CharField(primary_key=True, max_length=255)
+    table_id = models.CharField(primary_key=True, max_length=512)
     table_name = models.CharField(max_length=512)
     table_prefix = models.CharField(max_length=512, blank=True, null=True)
 

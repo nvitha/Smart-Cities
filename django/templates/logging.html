@@ -3,9 +3,15 @@
 
 
 {% block header_nav %}
-  <a class="mdl-navigation__link" href="{% url 'riva_logging' %}">Riva Logs</a> |
-  <a class="mdl-navigation__link" href="{% url 'bac_logging' %}">BAC Logs</a> |
-  <a class="mdl-navigation__link" href="{% url 'volttron_logging' %}">Volttron Logs</a>
+    <div class="mdl-layout-spacer"></div>
+    <nav class="mdl-navigation mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <a class="mdl-navigation__link mdl-layout__tab" href="{% url 'logging' %}">Smart Meter Logs</a>
+      <a class="mdl-navigation__link  mdl-layout__tab">|<a/>
+      <a class="mdl-navigation__link mdl-layout__tab" href="{% url 'volttron_logging' %}">Volttron Logs</a>
+        <a class="mdl-navigation__link  mdl-layout__tab">|<a/>
+      <a class="mdl-navigation__link mdl-layout__tab" href="{% url 'bac_logging' %}">Building Logs</a>
+
+    </nav>
 {% endblock %}
 
 {% block nav_title %}
@@ -15,8 +21,45 @@ Logging
 
 {% block content %}
 <div class="smartcontent mdl-grid">
-  <div class="mdl-color--white mdl-shadow--2dp mdl-cell max-cell mdl-grid">
-    {% render_table table "mytable.html" %}
-  </div>
+    {% if table_type == 'riva' %}
+            <div class="mdl-cell--6-col mdl-grid">
+                <div class="mdl-cell--6-col  mdl-cell--2-offset center-text mdl-typography--font-bold">
+                    Test Initiations
+                </div>
+            </div>
+            <div class="mdl-cell--6-col mdl-grid">
+                <div class="mdl-cell--6-col  mdl-cell--2-offset center-text mdl-typography--font-bold">
+                    Commands from Smart Meter
+                </div>
+            </div>
+    {% elif table_type == 'bac' %}
+            <div class="mdl-cell--6-col mdl-grid">
+                <div class="mdl-cell--6-col  mdl-cell--2-offset center-text mdl-typography--font-bold">
+                    Current Building Mode
+                </div>
+            </div>
+    {% endif %}
+</div>
+<div class="smartcontent mdl-grid">
+    {% if table_type == 'riva' %}
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell--6-col mdl-grid">
+            <div class="mdl-cell--6-col  mdl-cell--2-offset">
+                        {% render_table sim_table "mytable.html" %}
+            </div>
+        </div>
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell--6-col mdl-grid">
+            <div class="mdl-cell--6-col  mdl-cell--2-offset">
+            {% render_table command_table "mytable.html" %}
+            </div>
+        </div>
+    {% elif table_type == 'bac' %}
+
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell--6-col mdl-grid">
+            <div class="mdl-cell--6-col  mdl-cell--2-offset">
+            {% render_table bac_table "mytable.html" %}
+            </div>
+        </div>
+    {% endif  %}
+
 </div>
 {% endblock %}
