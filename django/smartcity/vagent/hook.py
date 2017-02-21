@@ -52,6 +52,10 @@ def bac_mode_four():
     process = subprocess.Popen(['python', '/var/www/html/smartcity/smartcity/vagent/bac_mode_four.py'], env={'PYTHONPATH': os.pathsep.join(sys.path)})
     error = process.communicate(process)
 
+def bac_mode_zero():
+    process = subprocess.Popen(['python', '/var/www/html/smartcity/smartcity/vagent/bac_mode_zero.py'], env={'PYTHONPATH': os.pathsep.join(sys.path)})
+    error = process.communicate(process)
+
 
 def write_volttron_output():
 

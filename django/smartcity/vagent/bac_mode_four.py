@@ -18,7 +18,7 @@ class TesterAgent(Agent):
     @Core.receiver('onstart')
     def onstart(self, sender, **kwargs):
 
-        writer = 'bm4'
+        writer = '4'
 
         now = datetime.utcnow().isoformat(' ') + 'Z'
         headers = {
@@ -29,7 +29,7 @@ class TesterAgent(Agent):
 
         self.vip.pubsub.publish(
             peer='pubsub',
-            topic='record/django/bac',
+            topic='record/django/riva/test',
             headers=headers,
             message=writer)
 

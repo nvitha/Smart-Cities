@@ -17,44 +17,46 @@
                     <div class="mdl-card__title mdl-color--light-blue-300">
                         <h2 class="mdl-card__title-text">Smart Meter</h2>
                     </div>
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
-                        <thead>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Test</th>
-                            <th>Start</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Thrashing</td>
-                            {% if last_test == 'Start Thrashing Test' %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_thrash' %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_thrash' %}"><i class="mdl-color-text--grey-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Random Changes</td>
-                            {% if last_test == 'Start Random Flood Test' %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_random' %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_random' %}"><i class="mdl-color-text--grey-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Uniform Flood</td>
-                            {% if last_test == 'Start Random Flood Test' %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_uniform' %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'test' 'start_uniform' %}"><i class="mdl-color-text--grey-400 material-icons" role="presentation">play_arrow</i></a></td>
-                            {% endif %}
+                    <form id="test_form" method="post">{% csrf_token %}
+                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Test</th>
+                                <th>Start</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Thrashing</td>
+                                <td>
+                                    <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-freeze" id="start_thrash" onClick="highlight(document.getElementById('start_thrash'), 'start_thrash');">
+                                        <i class="material-icons">play_arrow</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Random Changes</td>
+                                <td>
+                                    <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-freeze" id="start_random" onClick="highlight(document.getElementById('start_random'), 'start_random');">
+                                        <i class="material-icons">play_arrow</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Uniform Flood</td>
+                                <td>
+                                    <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-freeze" id="start_uniform" onClick="highlight(document.getElementById('start_uniform'), 'start_uniform');">
+                                        <i class="material-icons">play_arrow</i>
+                                    </button>
+                                </td>
 
-                        </tr>
-                        </tbody>
-                    </table>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a href="{% url 'refresh_status' 'riva' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Connection Status: {{ riva_status }}</a>
-                        <a class="mdl-button mdl-js-button mdl-js-ripple-effect">Last Test: {{ last_test }}</a>
+                        <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect">Connection Status: {{ riva_status }}</a>
+                        <span id="last_test_span" class="mdl-button mdl-js-button mdl-js-ripple-effect">Last Test: {{ last_test }}</span>
 
                     </div>
                 </div>
@@ -65,40 +67,45 @@
                     <div class="mdl-card__title mdl-color--cyan-300">
                         <h2 class="mdl-card__title-text">Volttron Service</h2>
                     </div>
-                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
-                            <thead>
-                            <tr>
-                                <th class="mdl-data-table__cell--non-numeric">Agent</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MySQL Historian VAgent</td>
-                                <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Riva Commands VAgent</td>
-                                <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                        <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Agent</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">MySQL Historian VAgent</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Riva Commands VAgent</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
 
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Riva Heartbeat VAgent</td>
-                                <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Riva Heartbeat VAgent</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
 
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">BAC Driver VAgent</td>
-                                <td><i class="mdl-color-text--red-400 material-icons" role="presentation">expand_more</i></td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Logic VAgent</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
 
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Django Listener VAgent</td>
-                                <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">BAC Driver</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Django Listener VAgent</td>
+                            <td><i class="mdl-color-text--green-400 material-icons" role="presentation">expand_less</i></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
                     <div class="mdl-card__actions mdl-card--border">
                     </div>
                 </div>
@@ -108,54 +115,174 @@
                     <div class="mdl-card__title mdl-color--teal-300">
                         <h2 class="mdl-card__title-text">Building Controller</h2>
                     </div>
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
-                        <thead>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Mode</th>
-                            <th>Enable</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Optimization Mode</td>
-                            {%  if bac_mode == 1 %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 1 %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 1 %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Building Mode</td>
-                            {%  if bac_mode == 2 %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 2  %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 2  %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Grid Mode</td>
-                            {%  if bac_mode == 3 %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 3  %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 3  %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Emergency Mode</td>
-                            {%  if bac_mode == 4 %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 4  %}"><i class="mdl-color-text--green-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% else %}
-                                <td><a class="mdl-navigation__link" href="{% url 'select_mode' 4  %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">cloud_upload</i></a></td>
-                            {% endif %}
-                        </tr>
-                        </tbody>
-                    </table>
+                    <form id="bac_mode_form" method="post">{% csrf_token %}
+                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Mode</th>
+                                <th>Enable</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Day Mode</td>
+
+                                <td>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bm1">
+                                        <input type="radio" id="bm1" class="mdl-radio__button" name="bm" value="1">
+                                    </label>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Night Mode</td>
+                                <td>
+
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bm2">
+                                        <input type="radio" id="bm2" class="mdl-radio__button" name="bm" value="2">
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Vacant Mode</td>
+                                <td>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bm3">
+                                        <input type="radio" id="bm3" class="mdl-radio__button" name="bm" value="3">
+                                    </label>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Energy Saving</td>
+                                <td>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bm4">
+                                        <input type="radio" id="bm4" class="mdl-radio__button" name="bm" value="4">
+                                    </label>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">Shutdown</td>
+                                <td>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bm0">
+                                        <input type="radio" id="bm0" class="mdl-radio__button" name="bm" value="0">
+                                    </label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a href="{% url 'refresh_status' 'bac' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Connection Status: Simulated</a>
-                        <a href="{% url 'refresh_status' 'bac' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Current Mode: {{ bac_mode }}</a>
+                        <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect">Connection Status: Connected</a>
+                        <span id="bac_mode_span" class="mdl-button mdl-js-button mdl-js-ripple-effect">Current Mode: {{ bac_mode_text }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                <div class="mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__actions mdl-card--border">
+                        <span id="bac_mode_span" class="mdl-button mdl-js-button mdl-js-ripple-effect">Current System Time: {{ current_time }}</span>
+                        <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="25" tabindex="0">
+
+                        <span id="bac_mode_span" class="mdl-button mdl-js-button mdl-js-ripple-effect">Current Temperature: {{ current_temp }}</span>
+                        <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="25" tabindex="0">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript">
+        // get the current bac_mode from template
+        var currentMode = '{{ bac_mode }}';
+        var debounce;
+
+        // this function initializes the radio button, param is passed from the view
+        $(document).ready(function() {
+            if (currentMode) { // check if variable is empty or not
+                $(':radio[name=bm][value='+currentMode+']').prop('checked', true);
+            }
+        });
+
+        // this function highlights the test arrow color on a timer
+        // and updates the 'Last Test' text on completion of test
+        function highlight(obj, test){
+            var orig = obj.style.color;
+            obj.style.color = '#f00';
+
+            var timeDelay = 10000;
+            var selectedTestText = 'Last Test: ';
+
+            if (test == "start_thrash") {
+                timeDelay = 5000;
+                selectedTestText += 'Thrashing Test';
+            }
+            else if (test == 'start_random'){
+                timeDelay = 35000;
+                selectedTestText += 'Random Test';
+            }
+            else if (test == 'start_uniform'){
+                timeDelay = 20000;
+                selectedTestText += 'Uniform Test';
+            }
+
+            $(".button-freeze").prop('disabled', true);
+
+            setTimeout(function(){
+                obj.style.color = orig;
+                $(".button-freeze").prop('disabled', false); // search for buttons w/ this class
+                $('#last_test_span').text(selectedTestText); // update span with this id
+            }, timeDelay);
+        }
+
+        // this function sends an ajax request back to the view through the bac_test/ url
+        // in order to initiate a test by button click
+        $(document).ready(function(){
+            $('#start_thrash, #start_random, #start_uniform').on('click',function(e) {
+                var selectedTest = $(this).serialize() + $(this).attr('id');
+                $.ajax({
+                    type:'POST',
+                    url: 'bac_test/',
+                    data:{
+                        test: selectedTest,
+                        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success:function(){
+                    }
+                });
+                e.preventDefault();
+            });
+        });
+
+        // this function sends an ajax request back to the view through the bac_mode/ url
+        // in order to manually change the bac mode with radio buttons and updates the
+        // 'Current Mode' text on success
+        $(document).on('change', 'input[name="bm"]:radio', function(e){
+            e.preventDefault();
+
+            var radioVal = $("input[name='bm']:checked").val();
+            $.ajax({
+                type:'POST',
+                url:'bac_mode/',
+                data:{
+                    mode:radioVal,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                    var radioText = 'Current Mode: ';
+                    if (radioVal == '1') radioText += 'Day Mode';
+                    else if (radioVal == '2') radioText += 'Night Mode';
+                    else if (radioVal == '3') radioText += 'Vacant Mode';
+                    else if (radioVal == '4') radioText += 'Emergency Mode';
+                    else if (radioVal == '0') radioText += 'Shutdown';
+                    $('#bac_mode_span').text(radioText);
+                }
+
+            })
+        });
+
+    </script>
 {% endblock %}

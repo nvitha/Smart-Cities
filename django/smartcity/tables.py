@@ -23,7 +23,7 @@ class DjangoRivaTable(tables.Table):
     class Meta:
         model = Data
         fields = ('value_string', 'ts')
-        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width'}
+        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width'}
         row_attrs = {'class': 'mdl-data-table__cell--non-numeric'}
 
 
@@ -32,20 +32,22 @@ class RivaCommandsTable(tables.Table):
     topic_id = tables.Column(verbose_name='Switch to Mode')
 
     def render_topic_id(self, value):
-        if value == 5:
-            return 'Optimization Mode'
-        if value == 6:
-            return 'Building Mode'
-        if value == 7:
-            return 'Grid Mode'
-        if value == 8:
-            return 'Emergency Mode'
+        if value == 11:
+            return 'Day Mode'
+        if value == 12:
+            return 'Night Mode'
+        if value == 13:
+            return 'Vacant Mode'
+        if value == 14:
+            return 'Energy Saving Mode'
+        if value == 19:
+            return 'Shutdown'
 
 
     class Meta:
         model = Data
         fields = ('topic_id', 'ts')
-        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width'}
+        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width'}
         row_attrs = {'class': 'mdl-data-table__cell--non-numeric'}
 
 
@@ -54,18 +56,20 @@ class BacTable(tables.Table):
     ts = tables.Column(verbose_name='Datetime')
 
     def render_value_string(self, value):
-        if value == '"bm1"':
-            return 'Optimization Mode'
-        if value == '"bm2"':
-            return 'Building Mode'
-        if value == '"bm3"':
-            return 'Grid Mode'
-        if value == '"bm4"':
-            return 'Emergency Mode'
+        if value == '"1"':
+            return 'Day Mode'
+        if value == '"2"':
+            return 'Night Mode'
+        if value == '"3"':
+            return 'Vacant Mode'
+        if value == '"4"':
+            return 'Energy Saving Mode'
+        if value == '"0"':
+            return 'Shutdown'
 
     class Meta:
         model = Data
         fields = ('value_string', 'ts')
-        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width'}
+        attrs = {'class': 'table-center mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width'}
         row_attrs = {'class': 'mdl-data-table__cell--non-numeric'}
 

@@ -21,12 +21,17 @@ class TesterAgent(Agent):
         writer = 'Stop uniform test.'
 
         now = datetime.utcnow().isoformat(' ') + 'Z'
-        headers = {
-            # 'AgentID': self._agent_id,
-            headers_mod.CONTENT_TYPE: headers_mod.CONTENT_TYPE.PLAIN_TEXT,
-            headers_mod.DATE: now,
-        }
-
+        # headers = {
+        #     # 'AgentID': self._agent_id,
+        #     headers_mod.CONTENT_TYPE: headers_mod.CONTENT_TYPE.PLAIN_TEXT,
+        #     headers_mod.DATE: now,
+        # }
+        headers = 
+        # self.vip.pubsub.publish(
+        #     peer='pubsub',
+        #     topic='record/django/riva',
+        #     headers=headers,
+        #     message=writer)
         self.vip.pubsub.publish(
             peer='pubsub',
             topic='record/django/riva',

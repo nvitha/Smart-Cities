@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 from smartcity.views import index_view
 from smartcity.views import metrics_view
@@ -24,17 +25,18 @@ from smartcity.views import logging_view
 urlpatterns = [
     # Admin UI
     url(r'^admin/', admin.site.urls),
+
+    # Login/Logout Page
+    url(r'^$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+
     # Home Page
-    url(r'^$', index_view.index, name='index'),
+    url(r'^home$', index_view.index, name='index'),
+    # Home Page Test Button Ajax Call
+    url(r'^bac_test/$', index_view.start_test),
+    # Home Page BAC Switch Ajax Call
+    url(r'^bac_mode/$', index_view.change_bac_mode),
 
-    # Index Smart Meter
-    url(r'^test=(?P<test_mode>[A-Za-z]+_[A-Za-z]+)/$', index_view.index, name='test'),
-
-    # Manually Refresh Status
-    url(r'^refresh=(?P<refresh_flag>[A-Za-z]+)$', index_view.index, name='refresh_status'),
-
-    # Index BAC
-    url(r'^mode_(?P<bac_mode>[1-4]+)/$', index_view.index, name='select_mode'),
 
     # Metrics View
     url(r'^metrics/', metrics_view.metrics, name='metrics'),

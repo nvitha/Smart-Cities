@@ -28,9 +28,9 @@ Metrics
                         datasets: [
                             {
                                 label: "Count per button pressed.",
-                                fillColor: "rgba(255,109,0,0.8)",
-                                strokeColor: "rgba(220,220,220,1)",
-                                pointColor: "rgba(220,220,220,1)",
+                                fillColor: "rgba(0, 188, 212,0.8)",
+                                strokeColor: "rgba(0, 188, 212,1)",
+                                pointColor: "rgba(0, 188, 212,1)",
                                 pointStrokeColor: "#fff",
                                 pointHighlightFill: "#fff",
                                 pointHighlightStroke: "rgba(220,220,220,1)",
@@ -38,9 +38,16 @@ Metrics
                             }
                         ]
                     };
+
                     var ctx = document.getElementById("chart_container").getContext("2d");
-                    var myBarChart = new Chart(ctx).Bar(data);
-                });
+                    var myBarChart = new Chart(ctx).Bar(data, {
+                                                            responsive: true,
+                                                            scaleOverride : true,
+                                                            scaleSteps : 10,
+                                                            scaleStepWidth : 50,
+                                                            scaleStartValue : 0
+                                                        });
+                    });
               </script>
                 <div class="mdl-layout-spacer"></div>
                     <canvas id="chart_container" width="400" height="400"></canvas>

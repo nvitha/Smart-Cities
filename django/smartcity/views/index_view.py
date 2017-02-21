@@ -1,7 +1,8 @@
 import logging
+
 from django.http import HttpResponse
-# importing loading from django template
 from django.template import loader
+
 # our view which is a function named index
 from smartcity.vagent import hook
 from smartcity.models import Data
@@ -10,44 +11,43 @@ from smartcity.models import RivaConnection
 logger = logging.getLogger(__name__)
 
 
-def index(request, bac_mode=0, test_mode='', refresh_flag=''):
+# print debug statements go to /var/log/apache2/error.log
+def index(request):
 
+    # query database for current riva connection status
     riva_status = get_riva_status()
 
-    if bac_mode != 0:
-        set_bac_mode(bac_mode, request)
-        bac_mode = get_bac_mode(request)
-    else:
-        bac_mode = init_bac_mode(request)
+    # query database for current bac mode
+    bac_mode = get_bac_mode()
+    bac_mode_text = get_bac_mode_text(bac_mode)
 
-    if test_mode != '':
-        select_test(test_mode)
-        session_test(test_mode, request)
-    else:
-        init_session(request)
-
+    # query database for last test conducted
     last_test = get_last_test()
 
-    start_thrash = request.session['start_thrash']
-    stop_thrash = request.session['stop_thrash']
-
-    start_random = request.session['start_random']
-    stop_random = request.session['stop_random']
-
-    start_uniform = request.session['start_uniform']
-    stop_uniform = request.session['stop_uniform']
-
-    context = {'start_thrash': start_thrash, 'stop_thrash': stop_thrash,
-               'start_random': start_random, 'stop_random': stop_random,
-               'start_uniform': start_uniform, 'stop_uniform': stop_uniform,
-               'bac_mode': int(bac_mode), 'riva_status': riva_status,
-               'last_test': last_test}
+    context = {'bac_mode': int(bac_mode), 'bac_mode_text': bac_mode_text, 'riva_status': riva_status, 'last_test': last_test}
 
     # getting our template
     template = loader.get_template('index.html')
 
     # rendering the template in HttpResponse
     return HttpResponse(template.render(context, request))
+
+
+def change_bac_mode(request):
+    if request.method == 'POST':
+        mode = request.POST['mode']
+        set_bac_mode(mode)
+
+    return HttpResponse(request)
+
+
+def start_test(request):
+    # print 'Called Function: start_test'
+    if request.method == 'POST':
+        test = request.POST['test']
+        select_test(test)
+
+    return HttpResponse(request)
 
 
 def get_riva_status():
@@ -57,6 +57,38 @@ def get_riva_status():
         return 'Connected'
     else:
         return 'Disconnected'
+
+
+def get_bac_mode():
+    query = Data.objects.filter(topic_id=10).values('value_string').order_by("-ts")[0]
+    bac_mode = int(query['value_string'][-2])
+    return bac_mode
+
+
+def get_bac_mode_text(bac_mode):
+    if bac_mode == 1:
+        return 'Day Mode'
+    elif bac_mode == 2:
+        return 'Night Mode'
+    elif bac_mode == 3:
+        return 'Vacant Mode'
+    elif bac_mode == 4:
+        return 'Emergency Mode'
+    elif bac_mode == 0:
+        return 'Shutdown'
+
+
+def set_bac_mode(bac_mode):
+    if bac_mode == '1':
+        hook.bac_mode_one()
+    elif bac_mode == '2':
+        hook.bac_mode_two()
+    elif bac_mode == '3':
+        hook.bac_mode_three()
+    elif bac_mode == '4':
+        hook.bac_mode_four()
+    elif bac_mode == '0':
+        hook.bac_mode_zero()
 
 
 def select_test(test_mode):
@@ -74,83 +106,20 @@ def select_test(test_mode):
         hook.stop_uniform_test()
 
 
-def session_test(test_mode, request):
-
-    if test_mode == 'start_thrash':
-        request.session['start_thrash'] = 'true'
-        request.session['stop_thrash'] = 'false'
-    elif test_mode == 'stop_thrash':
-        request.session['start_thrash'] = 'false'
-        request.session['stop_thrash'] = 'true'
-    elif test_mode == 'start_random':
-        request.session['start_random'] = 'true'
-        request.session['stop_random'] = 'false'
-    elif test_mode == 'stop_random':
-        request.session['start_random'] = 'false'
-        request.session['stop_random'] = 'true'
-    elif test_mode == 'start_uniform':
-        request.session['start_uniform'] = 'true'
-        request.session['stop_uniform'] = 'false'
-    elif test_mode == 'stop_uniform':
-        request.session['start_uniform'] = 'false'
-        request.session['stop_uniform'] = 'true'
-
-
-def init_session(request):
-    if 'start_thrash' not in request.session:
-        request.session['start_thrash'] = ''
-    if 'stop_thrash' not in request.session:
-        request.session['stop_thrash'] = ''
-    if 'start_random' not in request.session:
-        request.session['start_random'] = ''
-    if 'stop_random' not in request.session:
-        request.session['stop_random'] = ''
-    if 'start_uniform' not in request.session:
-        request.session['start_uniform'] = ''
-    if 'stop_uniform' not in request.session:
-        request.session['stop_uniform'] = ''
-
-
-def set_bac_mode(bac_mode, request):
-    if bac_mode == '1':
-        hook.bac_mode_one()
-        request.session['bac_mode'] = 1
-    elif bac_mode == '2':
-        hook.bac_mode_two()
-        request.session['bac_mode'] = 2
-    elif bac_mode == '3':
-        hook.bac_mode_three()
-        request.session['bac_mode'] = 3
-    elif bac_mode == '4':
-        hook.bac_mode_four()
-        request.session['bac_mode'] = 4
-
-
-def get_bac_mode(request):
-    return request.session['bac_mode']
-
-
-def init_bac_mode(request):
-    query = Data.objects.filter(topic_id=1).values('value_string').order_by("-ts")[0]
-    bac_mode = int(query['value_string'][-2])
-    request.session['bac_mode'] = bac_mode
-    return bac_mode
-
-
 def get_last_test():
-    query = Data.objects.filter(topic_id=4).values('value_string').order_by("-ts")[0]
+    query = Data.objects.filter(topic_id=15).values('value_string').order_by("-ts")[0]
 
     value = query['value_string']
 
     if value == '"st"':
-        return 'Start Thrashing Test'
+        return 'Thrashing Test'
     elif value == '"et"':
-        return 'End Thrashing Test'
+        return 'Thrashing Test'
     elif value == '"su"':
-        return 'Start Flood Test'
+        return 'Flood Test'
     elif value == '"eu"':
-        return 'End Flood Test'
+        return 'Flood Test'
     elif value == '"sr"':
-        return 'Start Random Flood Test'
+        return 'Random Flood Test'
     elif value == '"er"':
-        return 'End Random Flood Test'
+        return 'Random Flood Test'

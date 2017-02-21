@@ -12,7 +12,7 @@ heartbeat_period = 10
 # remote vip address.
 _params = {
 	# The root of the address.
-	'vip_address': 'tcp://127.0.0.1',
+	'vip_address': 'tcp://147.222.165.15',
 	'port': 22916,
 	
 	# public and secret key for the standalonelistener agent.

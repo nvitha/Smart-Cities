@@ -12,13 +12,13 @@ def logging(request):
     # define variable dict to pass into the template
     table_type = 'riva'
 
-    sim_table = DjangoRivaTable(Data.objects.filter(topic_id=4), order_by='-ts')
+    sim_table = DjangoRivaTable(Data.objects.filter(topic_id=15), order_by='-ts')
     RequestConfig(request).configure(sim_table)
 
-    command_table = RivaCommandsTable(Data.objects.filter(Q(topic_id=5) |
-                                                          Q(topic_id=6) |
-                                                          Q(topic_id=7) |
-                                                          Q(topic_id=8)
+    command_table = RivaCommandsTable(Data.objects.filter(Q(topic_id=11) |
+                                                          Q(topic_id=12) |
+                                                          Q(topic_id=13) |
+                                                          Q(topic_id=14)
                                                           ), order_by='-ts')
 
     RequestConfig(request).configure(command_table)
@@ -34,7 +34,7 @@ def logging(request):
 def bac_logging(request):
     table_type = 'bac'
 
-    table = BacTable(Data.objects.filter(topic_id=1), order_by='-ts')
+    table = BacTable(Data.objects.filter(topic_id=10), order_by='-ts')
     RequestConfig(request).configure(table)
     query = Data.objects.all()
     context = {'bac_table': table, 'table_type': 'bac'}
